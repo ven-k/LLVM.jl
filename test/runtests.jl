@@ -83,11 +83,11 @@ if LLVM.has_orc_v2()
     include("orcv2.jl")
 end
 
+include("dibuilder.jl")
 
 include("Kaleidoscope.jl")
 
 include("examples.jl")
 
 include("interop.jl")
-
 end
