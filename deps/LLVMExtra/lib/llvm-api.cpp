@@ -548,3 +548,9 @@ LLVMValueRef LLVMBuildCallWithOpBundle(LLVMBuilderRef B, LLVMValueRef Fn,
     return wrap(unwrap(B)->CreateCall(FnT, unwrap(Fn), makeArrayRef(unwrap(Args), NumArgs),
                                       BundleArray, Name));
 }
+
+#if LLVM_VERSION_MAJOR > 12
+LLVMBool LLVMContextSupportsTypedPointers(LLVMContextRef C) {
+  return unwrap(C)->supportsTypedPointers();
+}
+#endif
