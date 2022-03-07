@@ -90,7 +90,7 @@ function __init__()
     # sanity checks
     @debug "Using LLVM $(version()) at $libllvm"
     if libllvm != Base.libllvm_path()
-        @warn redefining the libllvm to $(Base.libllvm_path()); consider recompiling if it fails
+        @warn "Redefining the libllvm to $(Base.libllvm_path()). Consider recompiling if it fails"
         global libllvm = Base.libllvm_path()
     end
     if version() !== runtime_version()
