@@ -10,7 +10,7 @@ using Libdl
 include("base.jl")
 include("version.jl")
 
-const libllvm = Base.libllvm_path()
+libllvm = Base.libllvm_path()
 if libllvm === nothing
     error("""Cannot find the LLVM library loaded by Julia.
 
@@ -90,7 +90,8 @@ function __init__()
     # sanity checks
     @debug "Using LLVM $(version()) at $libllvm"
     if libllvm != Base.libllvm_path()
-        @error "Mismatch between LLVM library used during precompilation ($libllvm) and the current run-time situation ($(Base.libllvm_path())). Please recompile the package."
+        @warn redefining the libllvm to $(Base.libllvm_path()); consider recompiling if it fails
+        global libllvm = Base.libllvm_path()
     end
     if version() !== runtime_version()
         @error "Using a different version of LLVM ($(runtime_version())) than the one shipped with Julia ($(version())); this is unsupported"
